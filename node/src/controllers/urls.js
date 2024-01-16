@@ -19,9 +19,6 @@ const findOne = async (req, res, next) => {
   try {
     const { shortUrl } = req.params;
     url = await urlService.findOne(shortUrl);
-    if (!url) {
-      throw new AppError("URL Not found", 400);
-    }
     url.clicks++;
     url.save();
     res.redirect(url.fullUrl);
