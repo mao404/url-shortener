@@ -14,6 +14,10 @@ class UrlRepository {
   async create(url) {
     return await Url.create(url);
   }
+
+  async remove(shortUrl) {
+    return await Url.deleteOne({ shortUrl });
+  }
 }
 
 module.exports = UrlRepository;

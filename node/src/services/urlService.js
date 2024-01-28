@@ -13,8 +13,13 @@ const save = async (user) => {
   return await repository.create(user);
 };
 
+const remove = async (shortUrl) => {
+  return await repository.remove(shortUrl);
+};
+
 module.exports = {
   findAll,
   findOne,
   save,
+  remove,
 };
