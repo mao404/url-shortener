@@ -1,0 +1,458 @@
+{
+	"info": {
+		"_postman_id": "4a2791b7-4942-4368-98f9-a910a7cea116",
+		"name": "url-shortener-api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30515644"
+	},
+	"item": [
+		{
+			"name": "URL",
+			"item": [
+				{
+					"name": "Get All",
+					"item": [
+						{
+							"name": "Get All URL - Success",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Status code is NOT 500\", function () {\r",
+											"    pm.response.to.not.have.status(500);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response time is less than 500ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response is a JSON\", function () {\r",
+											"    pm.response.to.be.json;\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response has correct properties\", function () {\r",
+											"    var jsonData = pm.response.json()\r",
+											"    console.log(jsonData)\r",
+											"    pm.expect(jsonData).to.have.property('data')\r",
+											"    pm.expect(jsonData.data).to.be.an('array')\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{urlBasePath}}/url/short",
+									"host": [
+										"{{urlBasePath}}"
+									],
+									"path": [
+										"url",
+										"short"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Create URL",
+					"item": [
+						{
+							"name": "Create URL - Success",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.collectionVariables.set(\"randomNumber\", Math.random());"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 201\", function () {\r",
+											"    pm.response.to.have.status(201);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Status code is NOT 500\", function () {\r",
+											"    pm.response.to.not.have.status(500);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response time is less than 500ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response is a JSON\", function () {\r",
+											"    pm.response.to.be.json;\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response has correct properties\", function () {\r",
+											"    var jsonData = pm.response.json()\r",
+											"    console.log(jsonData)\r",
+											"    pm.expect(jsonData).to.have.property('data')\r",
+											"    pm.expect(jsonData.data).to.have.property('_id')\r",
+											"    pm.expect(jsonData.data).to.have.property('fullUrl')\r",
+											"    pm.expect(jsonData.data).to.have.property('shortUrl')\r",
+											"\r",
+											"    pm.collectionVariables.set(\"shortUrl\", jsonData.data.shortUrl);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"fullUrl\": \"https://www.{{randomNumber}}.com\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{urlBasePath}}/url",
+									"host": [
+										"{{urlBasePath}}"
+									],
+									"path": [
+										"url"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create URL - Failure",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Status code is NOT 500\", function () {\r",
+											"    pm.response.to.not.have.status(500);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response time is less than 500ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response is a JSON\", function () {\r",
+											"    pm.response.to.be.json;\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response has correct properties\", function () {\r",
+											"    var jsonData = pm.response.json()\r",
+											"    pm.expect(jsonData).to.have.property('error')\r",
+											"    pm.expect(jsonData.error).to.have.property('detail')\r",
+											"    pm.expect(jsonData.error.detail).to.be.an('array')\r",
+											"\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"fullUrl\": \"aaaaa687465\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{urlBasePath}}/url",
+									"host": [
+										"{{urlBasePath}}"
+									],
+									"path": [
+										"url"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Get Single URL",
+					"item": [
+						{
+							"name": "Get single URL - Success",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Status code is NOT 500\", function () {\r",
+											"    pm.response.to.not.have.status(500);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response time is less than 500ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+											"});\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{urlBasePath}}/url/:idShort",
+									"host": [
+										"{{urlBasePath}}"
+									],
+									"path": [
+										"url",
+										":idShort"
+									],
+									"variable": [
+										{
+											"key": "idShort",
+											"value": "A9AE1gFPl7"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get single URL - Failure",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Status code is NOT 500\", function () {\r",
+											"    pm.response.to.not.have.status(500);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response time is less than 500ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response is a JSON\", function () {\r",
+											"    pm.response.to.be.json;\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response has correct properties\", function () {\r",
+											"    var jsonData = pm.response.json()\r",
+											"    pm.expect(jsonData).to.have.property('error')\r",
+											"    pm.expect(jsonData.error).to.have.property('detail')\r",
+											"    pm.expect(jsonData.error.detail).to.be.an('array')\r",
+											"\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{urlBasePath}}/url/:idShort",
+									"host": [
+										"{{urlBasePath}}"
+									],
+									"path": [
+										"url",
+										":idShort"
+									],
+									"variable": [
+										{
+											"key": "idShort",
+											"value": "6876201asda"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Delete URL",
+					"item": [
+						{
+							"name": "Delete URL - Success",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Status code is NOT 500\", function () {\r",
+											"    pm.response.to.not.have.status(500);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response time is less than 500ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response is a JSON\", function () {\r",
+											"    pm.response.to.be.json;\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response has correct properties\", function () {\r",
+											"    var jsonData = pm.response.json()\r",
+											"    pm.expect(jsonData).to.have.property('data')\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"fullUrl\": \"aaaaa\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{urlBasePath}}/url/:idShort",
+									"host": [
+										"{{urlBasePath}}"
+									],
+									"path": [
+										"url",
+										":idShort"
+									],
+									"variable": [
+										{
+											"key": "idShort",
+											"value": "{{shortUrl}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete URL - Failure",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Status code is NOT 500\", function () {\r",
+											"    pm.response.to.not.have.status(500);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response time is less than 500ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response is a JSON\", function () {\r",
+											"    pm.response.to.be.json;\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response has correct properties\", function () {\r",
+											"    var jsonData = pm.response.json()\r",
+											"    pm.expect(jsonData).to.have.property('error')\r",
+											"    pm.expect(jsonData.error).to.have.property('detail')\r",
+											"    pm.expect(jsonData.error.detail).to.be.an('array')\r",
+											"\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"fullUrl\": \"aaaaa\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{urlBasePath}}/url/:idShort",
+									"host": [
+										"{{urlBasePath}}"
+									],
+									"path": [
+										"url",
+										":idShort"
+									],
+									"variable": [
+										{
+											"key": "idShort",
+											"value": "aaa"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "randomNumber",
+			"value": ""
+		},
+		{
+			"key": "shortUrl",
+			"value": ""
+		}
+	]
+}
