@@ -2,8 +2,8 @@
   "openapi": "3.0.0",
   "info": {
     "title": "URL-shortener API.",
-    "description": "## This is a base api to start new projects.",
-    "version": "0.0.1",
+    "description": "## API to control and manage URL shortener.",
+    "version": "0.2.0",
     "contact": {
       "email": "maopadron25@gmail.com"
     }
@@ -11,12 +11,136 @@
 
   "servers": [
     {
-      "url": "https://localhost:3000/api/v1",
+      "url": "http://localhost:3000/api/v1",
       "description": "Development"
     },
     {
       "url": "/api/v1",
       "description": "Production"
     }
-  ]
+  ],
+  "tags": [
+    {
+      "name": "URL",
+      "description": "Operations made with the URL"
+    }
+  ],
+  "paths": {
+    "/url/": {
+      "get": {
+        "tags": ["URL"],
+        "summary": "Get a list of all the shortened URLs",
+        "description": "## Get the list of all the saved shortened URLs in the database",
+        "responses": {
+          "200": {
+            "description": "The array of URLs in JSON format",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/URL"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["URL"],
+        "summary": "Creates a new URL and shortens it",
+        "description": "## Creates the new shortened URL",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/URL"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "URL created and shortened"
+          }
+        }
+      }
+    },
+    "/url/{idShort}": {
+      "get": {
+        "tags": ["URL"],
+        "summary": "Get the original URL",
+        "description": "## Get the original URL and redirects",
+        "parameters": [
+          {
+            "name": "idShort",
+            "in": "path",
+            "description": "The string generated to shorten the URL",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "URL fetched"
+          },
+          "400": {
+            "description": "URL ID not found"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["URL"],
+        "summary": "Deletes the URL from the database by providing the ID",
+        "description": "## Deletes the URL from the database by providing the ID",
+        "parameters": [
+          {
+            "name": "idShort",
+            "in": "path",
+            "description": "The string generated to shorten the URL",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "URL deleted"
+          },
+          "400": {
+            "description": "URL ID not found"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "URL": {
+        "required": ["fullUrl", "shortUrl", "clicks"],
+        "type": "object",
+        "properties": {
+          "fullUrl": {
+            "description": "The URL to be converted.",
+            "type": "string",
+            "example": "https://www.youtube.com/"
+          },
+          "shortUrl": {
+            "description": "Shorted URL generated.",
+            "type": "string",
+            "example": "WgRwK0d3DN"
+          },
+          "clicks": {
+            "description": "Clicks made to the generated URL.",
+            "type": "number",
+            "example": "5"
+          }
+        }
+      }
+    }
+  }
 }

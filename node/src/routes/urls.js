@@ -13,7 +13,7 @@ const {
 
 const router = Router();
 
-router.get("/short", findAll);
+router.get("/", findAll);
 router.get("/:shortUrl", getRequestValidations, findOne);
 router.post("/", postRequestValidations, createUrl);
 router.delete("/:shortUrl", deleteRequestValidations, removeUrl);
