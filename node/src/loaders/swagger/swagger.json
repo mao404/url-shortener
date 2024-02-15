@@ -11,11 +11,7 @@
 
   "servers": [
     {
-<<<<<<< HEAD
-      "url": "https://localhost:4000/api/v1",
-=======
-      "url": "http://localhost:3000/api/v1",
->>>>>>> f5ab3441c1e9c87007e48a857d9c04ade26de5ea
+      "url": "http://localhost:4000/api/v1",
       "description": "Development"
     },
     {
