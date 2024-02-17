@@ -2,15 +2,17 @@ import {
   Box,
   Input,
   InputGroup,
+  FormControl,
+  useColorMode,
   InputRightElement,
   Button,
   AbsoluteCenter,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import axios from "axios";
-import { Navigate } from "react-router-dom";
 
 function ShortInput() {
+  const { colorMode } = useColorMode();
   const [url, setUrl] = useState({
     fullUrl: "",
   });
@@ -32,31 +34,41 @@ function ShortInput() {
   };
   return (
     <Box
-      bg={"white"}
+      color={colorMode === "dark" ? "white" : "black"}
       w={"auto"}
       minH={"50vh"}
       overflow={"hidden"}
       border={"1px solid red"}
     >
       <AbsoluteCenter>
-        {short && <Navigate to="/shorten" />}
-        <form onSubmit={handleSubmit}>
-          <InputGroup size="md">
-            <Input
-              name="fullUrl"
-              required
-              w={"80vh"}
-              pr="4.5rem"
-              placeholder="Enter your link here"
-              onChange={handleChange}
-            />
-            <InputRightElement width="4.5rem">
-              <Button type="submit" h="1.75rem" size="sm" height={"5vh"}>
-                Shorten
-              </Button>
-            </InputRightElement>
-          </InputGroup>
-        </form>
+        <FormControl isRequired>
+          <form onSubmit={handleSubmit}>
+            <InputGroup size="md">
+              <Input
+                color={colorMode === "dark" ? "white" : "black"}
+                name="fullUrl"
+                w={"80vh"}
+                pr="4.5rem"
+                placeholder="Enter your link here"
+                onChange={handleChange}
+              />
+              <InputRightElement width="4.5rem">
+                <Button
+                  color={colorMode === "dark" ? "white" : "black"}
+                  type="submit"
+                  h="1.75rem"
+                  size="sm"
+                  height={"5vh"}
+                >
+                  Shorten
+                </Button>
+              </InputRightElement>
+            </InputGroup>
+          </form>
+        </FormControl>
+        <Box border={"1px solid green"} width={"50vh"}>
+          <h1>{short}</h1>
+        </Box>
       </AbsoluteCenter>
     </Box>
   );
