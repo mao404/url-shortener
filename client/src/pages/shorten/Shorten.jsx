@@ -10,7 +10,9 @@ import {
   Th,
   Td,
   Tbody,
+  Button,
 } from "@chakra-ui/react";
+import { DeleteIcon } from "@chakra-ui/icons";
 
 function Shorten() {
   const [fullUrl, setFullUrl] = useState([]);
@@ -20,6 +22,15 @@ function Shorten() {
     try {
       const res = await axios.get("/url");
       setFullUrl(res.data.data);
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  const handleDelete = async (short) => {
+    try {
+      await axios.delete(`/url/${short}`);
+      window.location.reload();
     } catch (error) {
       throw error;
     }
@@ -50,6 +61,14 @@ function Shorten() {
                 <Td>{data.fullUrl}</Td>
                 <Td>{data.shortUrl}</Td>
                 <Td isNumeric>{data.clicks}</Td>
+                <Button
+                  leftIcon={<DeleteIcon />}
+                  colorScheme="pink"
+                  variant="solid"
+                  onClick={() => handleDelete(data.shortUrl)}
+                >
+                  Delete
+                </Button>
               </Tr>
             </Tbody>
           ))}
