@@ -19,7 +19,7 @@ const findOne = async (req, res, next) => {
     url = await urlService.findOne(shortUrl);
     url.clicks++;
     url.save();
-    res.redirect(url.fullUrl);
+    res.status(200).json(new Success(url));
     return;
   } catch (err) {
     next(err);
