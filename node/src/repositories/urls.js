@@ -4,11 +4,11 @@ class UrlRepository {
   constructor() {}
 
   async findAll() {
-    return await Url.find();
+    return await Url.find({}, "_id fullUrl shortUrl clicks");
   }
 
   async findOne(shortUrl) {
-    return await Url.findOne({ shortUrl });
+    return await Url.findOne({ shortUrl }, "shortUrl");
   }
 
   async create(url) {
