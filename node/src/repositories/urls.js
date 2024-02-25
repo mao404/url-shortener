@@ -8,7 +8,7 @@ class UrlRepository {
   }
 
   async findOne(shortUrl) {
-    return await Url.findOne({ shortUrl }, "shortUrl");
+    return await Url.findOne({ shortUrl }, "fullUrl shortUrl clicks");
   }
 
   async create(url) {
