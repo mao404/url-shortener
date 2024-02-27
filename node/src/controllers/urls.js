@@ -36,7 +36,7 @@ const createUrl = async (req, res, next) => {
   try {
     let url = req.body;
     (req.body.shortUrl = uid.rnd()), (url = await urlService.save(url));
-
+    await delAsync("urls");
     res.status(201).json(new Success(url));
   } catch (err) {
     next(err);

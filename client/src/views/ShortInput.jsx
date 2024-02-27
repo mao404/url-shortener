@@ -7,7 +7,11 @@ import {
   InputRightElement,
   Button,
   AbsoluteCenter,
-  Heading,
+  Center,
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  PopoverBody,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import axios from "axios";
@@ -55,7 +59,7 @@ function ShortInput() {
       border={"1px solid red"}
     >
       <AbsoluteCenter>
-        <FormControl isRequired>
+        <FormControl isRequired padding={"2rem"}>
           <form onSubmit={handleSubmit}>
             <InputGroup size="md">
               <Input
@@ -80,20 +84,31 @@ function ShortInput() {
             </InputGroup>
           </form>
         </FormControl>
-        <Box width={"50vh"}>
-          <InputGroup size="md">
-            <Input pr="4.5rem" value={short} />
-            <InputRightElement width="4.5rem">
-              <Button
-                h="1.75rem"
-                size="sm"
-                onClick={() => copyToClipBoard(`${currentUrl}${short}`)}
-              >
-                Copy URL
-              </Button>
-            </InputRightElement>
-          </InputGroup>
-        </Box>
+        {short && (
+          <Center>
+            <Box width={"50vh"}>
+              <InputGroup size="md">
+                <Input pr="4.5rem" value={short} />
+                <InputRightElement width="4.5rem">
+                  <Popover isLazy>
+                    <PopoverTrigger>
+                      <Button
+                        h="1.75rem"
+                        size="sm"
+                        onClick={() => copyToClipBoard(`${currentUrl}${short}`)}
+                      >
+                        Copy URL
+                      </Button>
+                    </PopoverTrigger>
+                    <PopoverContent>
+                      <PopoverBody>{copySuccess}</PopoverBody>
+                    </PopoverContent>
+                  </Popover>
+                </InputRightElement>
+              </InputGroup>
+            </Box>
+          </Center>
+        )}
       </AbsoluteCenter>
     </Box>
   );
