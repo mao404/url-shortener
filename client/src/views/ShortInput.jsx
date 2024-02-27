@@ -7,6 +7,7 @@ import {
   InputRightElement,
   Button,
   AbsoluteCenter,
+  Heading,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import axios from "axios";
@@ -30,6 +31,19 @@ function ShortInput() {
       setShort(res.data.data.shortUrl);
     } catch (err) {
       console.log(err);
+    }
+  };
+
+  const [copySuccess, setCopySuccess] = useState("");
+
+  const currentUrl = window.location.href;
+
+  const copyToClipBoard = async (copyMe) => {
+    try {
+      await navigator.clipboard.writeText(copyMe);
+      setCopySuccess("Copied!");
+    } catch (err) {
+      setCopySuccess("Failed to copy!");
     }
   };
   return (
@@ -66,8 +80,19 @@ function ShortInput() {
             </InputGroup>
           </form>
         </FormControl>
-        <Box border={"1px solid green"} width={"50vh"}>
-          <h1>{short}</h1>
+        <Box width={"50vh"}>
+          <InputGroup size="md">
+            <Input pr="4.5rem" value={short} />
+            <InputRightElement width="4.5rem">
+              <Button
+                h="1.75rem"
+                size="sm"
+                onClick={() => copyToClipBoard(`${currentUrl}${short}`)}
+              >
+                Copy URL
+              </Button>
+            </InputRightElement>
+          </InputGroup>
         </Box>
       </AbsoluteCenter>
     </Box>
