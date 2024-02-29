@@ -56,7 +56,6 @@ function ShortInput() {
       w={"auto"}
       minH={"50vh"}
       overflow={"hidden"}
-      border={"1px solid red"}
     >
       <AbsoluteCenter>
         <FormControl isRequired padding={"2rem"}>

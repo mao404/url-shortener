@@ -11,7 +11,6 @@ export default function ThemeToggler() {
         onClick={toggleColorMode}
         variant="ghost"
       />
-      <h2>Toggle Theme</h2>
     </Box>
   );
 }

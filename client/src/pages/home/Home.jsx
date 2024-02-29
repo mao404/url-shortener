@@ -1,11 +1,13 @@
-import ThemeToggler from "../../components/ThemeToggler";
 import ShortInput from "../../views/ShortInput";
+import Navbar from "../../components/Navbar";
+import Footer from "../../components/Footer";
 
 function Home() {
   return (
     <>
-      <ThemeToggler />
+      <Navbar />
       <ShortInput />;
+      <Footer />
     </>
   );
 }

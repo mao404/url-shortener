@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef } from "react";
-import ThemeToggler from "../../components/ThemeToggler";
 import axios from "axios";
 import {
   Heading,
@@ -13,6 +12,8 @@ import {
   Button,
 } from "@chakra-ui/react";
 import { DeleteIcon } from "@chakra-ui/icons";
+import Navbar from "../../components/Navbar";
+import Footer from "../../components/Footer";
 
 function Shorten() {
   const [fullUrl, setFullUrl] = useState([]);
@@ -44,7 +45,7 @@ function Shorten() {
 
   return (
     <>
-      <ThemeToggler />
+      <Navbar />
       <Heading textAlign={"center"}>All URLs</Heading>
       <TableContainer>
         <Table variant="simple">
@@ -74,6 +75,7 @@ function Shorten() {
           ))}
         </Table>
       </TableContainer>
+      <Footer />
     </>
   );
 }
