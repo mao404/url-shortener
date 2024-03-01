@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/home/Home";
 import Shorten from "./pages/shorten/Shorten";
 import Redirect from "./pages/redirect/Redirect";
+import NotFound from "./pages/404/NotFound";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
           <Route path="/" element={<Home />}></Route>
           <Route path="/shorten" element={<Shorten />}></Route>
           <Route path="/:idShort" element={<Redirect />}></Route>
+          <Route path="/404" element={<NotFound />}></Route>
         </Routes>
       </BrowserRouter>
     </ChakraProvider>
