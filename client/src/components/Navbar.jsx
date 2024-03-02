@@ -18,7 +18,7 @@ import ThemeToggler from "./ThemeToggler";
 export default function Nav() {
   return (
     <>
-      <Box bg={useColorModeValue("gray.100", "gray.900")} px={4}>
+      <Box bg={useColorModeValue("gray.100", "gray.900")} px={4} mb={"2rem"}>
         <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
           <Box>Logo</Box>
 
