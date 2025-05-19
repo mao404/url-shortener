@@ -19,6 +19,6 @@ module.exports = async () => {
         #############################`
     );
   } catch (error) {
-    logger.info("Unable to connect to the database:", error);
+    logger.info("Unable to start the server:", error);
   }
 };

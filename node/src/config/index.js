@@ -22,4 +22,7 @@ module.exports = {
   mongoDB: {
     URI: process.env.MONGO_URI,
   },
+  redis: {
+    URI: process.env.REDIS_URI,
+  },
 };

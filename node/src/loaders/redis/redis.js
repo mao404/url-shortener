@@ -1,8 +1,12 @@
 const redis = require("redis");
 const util = require("util");
 const logger = require("../logger");
+const config = require("../../config/index");
+
+const REDIS_URI = config.redis.URI || "redis://localhost:6379"; // Usa variable de entorno o valor por defecto
 
 const client = redis.createClient({
+  url: REDIS_URI,
   legacyMode: true,
 });
 
