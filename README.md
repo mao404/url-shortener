@@ -132,3 +132,10 @@ npm install
 # 4. Start the development server
 npm run dev
 ```
+
+## ✅ To-Do
+
+- [ ] Migrate to TypeScript
+- [ ] Fix frontend issue (404 error not returned as expected)
+- [ ] Implement user account
+- [ ] Add Docker
