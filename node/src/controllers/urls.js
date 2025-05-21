@@ -1,6 +1,6 @@
 const ShortUniqueId = require("short-unique-id");
 const uid = new ShortUniqueId({ length: 10 });
-const urlService = require("../services/urlService");
+const urlService = require("../services/urlService").default;
 const Success = require("../handlers/successHandler");
 const { getAsync, setAsync, delAsync } = require("../loaders/redis/redis");
 

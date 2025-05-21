@@ -1,7 +1,7 @@
 const validator = require("validator");
 const { check } = require("express-validator");
 const AppError = require("../../errors/appError");
-const urlService = require("../../services/urlService");
+const urlService = require("../../services/urlService").default;
 const { validationResult } = require("../common");
 
 const _urlRequired = check("fullUrl", "URL is required").not().isEmpty();
