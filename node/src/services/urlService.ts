@@ -14,6 +14,12 @@ const findOne = async (
   return await repository.findOne(shortUrl);
 };
 
+const incrementClicks = async (
+  shortUrl: string
+): Promise<Pick<IUrl, "fullUrl" | "shortUrl" | "clicks"> | null> => {
+  return await repository.incrementClicks(shortUrl);
+};
+
 const save = async (url: IUrl): Promise<IUrl> => {
   return await repository.create(url);
 };
@@ -25,6 +31,7 @@ const remove = async (shortUrl: string) => {
 export default {
   findAll,
   findOne,
+  incrementClicks,
   save,
   remove,
 };

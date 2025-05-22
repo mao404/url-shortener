@@ -15,6 +15,16 @@ class UrlRepository {
     return await Url.findOne({ shortUrl }, "fullUrl shortUrl clicks");
   }
 
+  async incrementClicks(shortUrl: string) {
+    return Url.findOneAndUpdate(
+      { shortUrl },
+      { $inc: { clicks: 1 } },
+      { new: true }
+    )
+      .select("fullUrl shortUrl clicks")
+      .lean();
+  }
+
   async create(url: IUrl): Promise<IUrl> {
     return await Url.create(url);
   }
