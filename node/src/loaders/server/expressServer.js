@@ -1,7 +1,7 @@
 const express = require("express");
 const morgan = require("morgan");
 const swaggerUi = require("swagger-ui-express");
-const config = require("../../config");
+const config = require("../../config").default;
 const logger = require("../logger");
 
 class ExpressServer {
@@ -31,7 +31,7 @@ class ExpressServer {
       res.status(200).end();
     });
 
-    this.app.use(this.basePathUrl, require("../../routes/urls"));
+    this.app.use(this.basePathUrl, require("../../routes/urls").default);
   }
 
   _notFound() {

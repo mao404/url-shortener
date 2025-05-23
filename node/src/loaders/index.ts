@@ -1,8 +1,8 @@
 const ExpressServer = require("./server/expressServer");
-const config = require("../config");
-const logger = require("./logger");
-const connectDB = require("./mongodb/db");
-const { connectRedis } = require("./redis/redis");
+import config from "../config";
+import logger from "./logger";
+import connectDB from "./mongodb/db";
+import connectRedis from "./redis/redis";
 
 module.exports = async () => {
   try {

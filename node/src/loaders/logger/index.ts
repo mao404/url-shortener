@@ -1,5 +1,5 @@
-const winston = require("winston");
-const config = require("../../config");
+import winston from "winston";
+import config from "../../config/index";
 
 //To create the logger for development and production file logger
 const transports = [];
@@ -11,4 +11,4 @@ const LoggerInstance = winston.createLogger({
   transports,
 });
 
-module.exports = LoggerInstance;
+export default LoggerInstance;

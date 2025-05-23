@@ -6,7 +6,7 @@ import { getAsync, setAsync, delAsync } from "../loaders/redis/redis";
 
 const uid = new ShortUniqueId({ length: 10 });
 
-const findAll = async (
+export const findAll = async (
   req: Request,
   res: Response,
   next: NextFunction
@@ -25,7 +25,7 @@ const findAll = async (
   }
 };
 
-const findOne = async (
+export const findOne = async (
   req: Request,
   res: Response,
   next: NextFunction
@@ -46,7 +46,7 @@ const findOne = async (
   }
 };
 
-const createUrl = async (
+export const createUrl = async (
   req: Request,
   res: Response,
   next: NextFunction
@@ -64,7 +64,7 @@ const createUrl = async (
   }
 };
 
-const removeUrl = async (
+export const removeUrl = async (
   req: Request,
   res: Response,
   next: NextFunction
@@ -77,11 +77,4 @@ const removeUrl = async (
   } catch (err) {
     next(err);
   }
-};
-
-module.exports = {
-  findAll,
-  findOne,
-  createUrl,
-  removeUrl,
 };

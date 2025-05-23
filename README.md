@@ -124,7 +124,7 @@ A frontend web interface is included for user-friendly interaction with the app.
 git clone https://github.com/mao404/url-shortener.git
 
 # 2. Navigate into the project directory
-cd url-shortener-app
+cd node
 
 # 3. Install backend dependencies
 npm install
