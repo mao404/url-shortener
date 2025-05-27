@@ -1,4 +1,4 @@
-const ExpressServer = require("./server/expressServer");
+import ExpressServer from "./server/expressServer";
 import config from "../config";
 import logger from "./logger";
 import connectDB from "./mongodb/db";
