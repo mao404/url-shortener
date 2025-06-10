@@ -15,8 +15,15 @@ import { DeleteIcon } from "@chakra-ui/icons";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 
-function Shorten() {
-  const [fullUrl, setFullUrl] = useState([]);
+interface UrlData {
+  _id: string;
+  fullUrl: string;
+  shortUrl: string;
+  clicks: number;
+}
+
+const Shorten: React.FC = () => {
+  const [fullUrl, setFullUrl] = useState<UrlData[]>([]);
   const dataFetchedRef = useRef(false);
 
   const fetchAllUrl = async () => {
@@ -28,7 +35,7 @@ function Shorten() {
     }
   };
 
-  const handleDelete = async (short) => {
+  const handleDelete = async (short: string) => {
     try {
       await axios.delete(`/url/${short}`);
       window.location.reload();
@@ -80,4 +87,4 @@ function Shorten() {
   );
 }
 
-export default Shorten;
+export default Shorten; 

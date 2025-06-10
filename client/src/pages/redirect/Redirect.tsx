@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
 
-function Redirect() {
+const Redirect: React.FC = () => {
   const location = useLocation();
   const idShort = location.pathname;
   const dataFetchedRef = useRef(false);
@@ -22,6 +22,8 @@ function Redirect() {
     dataFetchedRef.current = true;
     getRedirect();
   });
+
+  return null;
 }
 
-export default Redirect;
+export default Redirect; 

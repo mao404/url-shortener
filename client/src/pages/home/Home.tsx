@@ -2,14 +2,14 @@ import ShortInput from "../../views/ShortInput";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 
-function Home() {
+const Home: React.FC = () => {
   return (
     <>
       <Navbar />
-      <ShortInput />;
+      <ShortInput />
       <Footer />
     </>
   );
 }
 
-export default Home;
+export default Home; 

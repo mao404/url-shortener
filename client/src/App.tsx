@@ -6,7 +6,7 @@ import Shorten from "./pages/shorten/Shorten";
 import Redirect from "./pages/redirect/Redirect";
 import NotFound from "./pages/404/NotFound";
 
-function App() {
+const App: React.FC = () => {
   return (
     <ChakraProvider>
       <BrowserRouter>
@@ -21,4 +21,4 @@ function App() {
   );
 }
 
-export default App;
+export default App; 

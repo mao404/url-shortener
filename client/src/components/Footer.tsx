@@ -6,7 +6,7 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 
-export default function SmallWithNavigation() {
+const SmallWithNavigation: React.FC = () => {
   return (
     <Box
       bg={useColorModeValue("gray.50", "gray.900")}
@@ -40,3 +40,5 @@ export default function SmallWithNavigation() {
     </Box>
   );
 }
+
+export default SmallWithNavigation; 

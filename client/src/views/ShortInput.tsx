@@ -14,22 +14,26 @@ import {
   PopoverBody,
   Text,
 } from "@chakra-ui/react";
-import { useState } from "react";
+import { useState, ChangeEvent, FormEvent } from "react";
 import axios from "axios";
 
-function ShortInput() {
+interface UrlState {
+  fullUrl: string;
+}
+
+const ShortInput: React.FC = () => {
   const { colorMode } = useColorMode();
-  const [url, setUrl] = useState({
+  const [url, setUrl] = useState<UrlState>({
     fullUrl: "",
   });
-  const [short, setShort] = useState();
+  const [short, setShort] = useState<string | undefined>();
 
-  const handleChange = (e) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setUrl((prev) => ({ ...prev, [e.target.name]: e.target.value }));
     console.log(url);
   };
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
       const res = await axios.post("/url", url);
@@ -39,11 +43,11 @@ function ShortInput() {
     }
   };
 
-  const [copySuccess, setCopySuccess] = useState("");
+  const [copySuccess, setCopySuccess] = useState<string>("");
 
   const currentUrl = window.location.href;
 
-  const copyToClipBoard = async (copyMe) => {
+  const copyToClipBoard = async (copyMe: string) => {
     try {
       await navigator.clipboard.writeText(copyMe);
       setCopySuccess("Copied!");
@@ -51,6 +55,7 @@ function ShortInput() {
       setCopySuccess("Failed to copy!");
     }
   };
+
   return (
     <>
       <Center>
@@ -138,4 +143,4 @@ function ShortInput() {
   );
 }
 
-export default ShortInput;
+export default ShortInput; 

@@ -1,7 +1,7 @@
 import { Box, Heading, Text, Button } from "@chakra-ui/react";
 import Footer from "../../components/Footer";
 
-export default function NotFound() {
+const NotFound: React.FC = () => {
   return (
     <>
       <Box textAlign="center" py={10} px={6}>
@@ -36,3 +36,5 @@ export default function NotFound() {
     </>
   );
 }
+
+export default NotFound; 

@@ -15,7 +15,7 @@ import {
 
 import ThemeToggler from "./ThemeToggler";
 
-export default function Nav() {
+const Nav: React.FC = () => {
   return (
     <>
       <Box bg={useColorModeValue("gray.100", "gray.900")} px={4} mb={"2rem"}>
@@ -65,3 +65,5 @@ export default function Nav() {
     </>
   );
 }
+
+export default Nav; 
